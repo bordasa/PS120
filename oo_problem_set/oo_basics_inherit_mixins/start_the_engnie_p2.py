@@ -4,7 +4,7 @@ class Vehicle:
 
 class Truck(Vehicle):
     def start_engine(self, speed):
-        return f"Ready to go! Drive {speed}, please!"
+        return super().start_engine + f" Drive {speed}, please!"
 
 # Comments show expected output
 truck1 = Truck()
