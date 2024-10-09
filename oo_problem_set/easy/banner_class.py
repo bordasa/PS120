@@ -5,7 +5,7 @@ class Banner:
         if width == None:
             self.width = len(self.message)
         elif width >= 2:
-            self.width = width - 2
+            self.width = width - 2  #-2 to account for the minimum buffer that is hard-coded
         else:
             raise ValueError("Banner width must be at least 2")
 
@@ -26,12 +26,12 @@ class Banner:
     def _message_line(self):
         if len(self.message) == self.width:
             return f"| {self.message} |"
+        
         elif len(self.message) < self.width:
             return self._create_short_line(self.message)
             
         else:
             full_lines, short_line_len = divmod(len(self.message), self.width)
-            print(full_lines, short_line_len)
             split_message_list = []
 
             for multiplier in range(1, full_lines + 1):
@@ -70,7 +70,7 @@ print(banner)
 # |                                            |
 # +--------------------------------------------+
 
-banner = Banner('', 30)
+banner = Banner('', 1)
 print(banner)
 # +--+
 # |  |
