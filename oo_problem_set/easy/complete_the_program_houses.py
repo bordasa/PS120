@@ -11,10 +11,16 @@ class House:
         self._price = value
 
     def __lt__(self, other):
-        return self.price < other.price
+        if isinstance(other, House):
+            return self.price < other.price
+        
+        return NotImplemented
     
     def __gt__(self, other):
-        return  self.price > other.price
+        if isinstance(other, House):
+            return  self.price > other.price
+        
+        return NotImplemented
 
 home1 = House(100000)
 home2 = House(150000)
