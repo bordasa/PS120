@@ -45,7 +45,8 @@ class SmartLamp:
         self.brightness = brightness
 
     def glow(self):
-        return (f'The lamp glows {self.color} with brightness {self.brightness}%.')
+        return (f'The lamp glows {self.color} with '
+                 f'brightness {self.brightness}%.')
 
     @property
     def color(self):                    # Getter for _color
