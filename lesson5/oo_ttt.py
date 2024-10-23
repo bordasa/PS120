@@ -59,7 +59,7 @@ class Board:
         self.squares[key].marker = marker
 
     def unused_squares(self):
-        return [key 
+        return [key
                 for key, square in self.squares.items()
                 if square.is_unused()]
 
