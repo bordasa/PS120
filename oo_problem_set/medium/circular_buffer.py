@@ -1,31 +1,28 @@
 class CircularBuffer:
-    def __init__(self, num_of_items):
-        self._items = []
-        self.limit = num_of_items
+    def __init__(self, size):
+        self.size = size
+        self.buffer = [None] * size
+        self.oldest = 0
+        self.next = 0
 
-    @property
-    def limit(self):
-        return self._limit
-    
-    @limit.setter
-    def limit(self, limit):
-        if not isinstance(limit, int):
-            raise ValueError("Buffer size must be an integer.")
+    def put(self, obj):
+        next_item = (self.next + 1) % self.size
+
+        if self.buffer[self.next] is not None:
+            self.oldest = next_item
         
-        self._limit = limit
+        self.buffer[self.next] = obj
+        self.next = next_item
 
-    def put(self, value):
-        if len(self._items) < self.limit:
-            self._items.append(value)
-        else:
-            self._items.pop(0)
-            self._items.append(value)
-    
     def get(self):
-        if not self._items:
-            return None
+        value = self.buffer[self.oldest]
+        self.buffer[self.oldest] = None
 
-        return self._items.pop(0)
+        if value is not None:
+            self.oldest += 1
+            self.oldest %= self.size
+        
+        return value
 
 buffer = CircularBuffer(3)
 
